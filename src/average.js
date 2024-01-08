@@ -1,14 +1,29 @@
-/**
- * Calculates the average of a series of numbers.
- * 
- * @param {number[]} data An array of numbers.
- * @returns {number} The average of the numbers in the array.
- */
+// Fonction pour obtenir les taux de change
+async function getExchangeRate(baseCurrency, targetCurrency) {
+    const apiKey = '36e2991d88d74ffe4e463dd0'; // Remplacez ceci par votre clé API
+    const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${baseCurrency}`;
 
-export default function average(data) {
-    if (!Array.isArray(data) || !data.every(Number.isFinite)) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.result === 'success') {
+            return data.conversion_rates[targetCurrency];
+        } else {
+            throw new Error(`Erreur lors de la récupération des taux de change: ${data['error-type']}`);
+        }
+    } catch (error) {
+        console.error("Erreur réseau ou autre problème:", error);
+        return null;
+    }
+}
+
+// Fonction pour convertir une devise
+export async function convertCurrency(amount, baseCurrency, targetCurrency) {
+    const rate = await getExchangeRate(baseCurrency, targetCurrency);
+    if (rate !== null) {
+        return amount * rate;
+    } else {
         return NaN;
     }
-    const sum = data.reduce((a,b) => a + b, 0);
-    return sum / data.length;
 }

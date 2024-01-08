@@ -1,4 +1,3 @@
-import average from '../src/average.js';
+import { convertCurrency } from './src/average.js';
 
-console.log(average([1, 2, 3]));
-
+convertCurrency(100, 'USD', 'EUR').then(convertedAmount => console.log(`Converti: ${convertedAmount}`));
