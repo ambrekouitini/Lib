@@ -1,11 +1,12 @@
 {
   "name": "ambre-kouitini-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "release": "release-it"
   },
   "author": "",
   "license": "MIT",
@@ -18,7 +19,6 @@
       "mjs"
     ]
   },
-
   "dependencies": {
     "jest": "^29.7.0"
   },
@@ -26,6 +26,12 @@
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.7",
     "babel-jest": "^29.7.0",
-    "eslint": "^8.56.0"
+    "eslint": "^8.56.0",
+    "release-it": "^17.0.1"
+  },
+  "release-it": {
+    "github": {
+      "release": true
+    }
   }
 }
